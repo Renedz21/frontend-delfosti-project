@@ -1,27 +1,15 @@
 # Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.
+Este proyecto es una aplicación web que permite la gestión de creación de proyectos y tareas, así como la asignación de tareas a los mismos.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para ejecutar el proyecto en modo desarrollo, se debe ejecutar el comando `ng serve` en la carpeta raíz del proyecto. Luego, se debe acceder a la dirección `http://localhost:4200/`. La aplicación se recargará automáticamente si se realizan cambios en el código fuente.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Para construir el proyecto, se debe ejecutar el comando `ng build` en la carpeta raíz del proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`. Use la bandera `--prod` para una construcción de producción.
 
-## Running unit tests
+## Acerca de la aplicación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+La aplicación está desarrollada en Angular 15 con TailwindCSS. Para el manejo de datos se utiliza el API hecho con NestJS y PostgreSQL.

@@ -1,0 +1,184 @@
+<section class="w-full min-h-screen transition-all z-10 duration-100 ease-linear text-white" [ngClass]="{
+        'bg-gray-900/50':modalOpen.length != 0,
+        'bg-gray-900':modalOpen.length == 0
+}">
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <a routerLink="/dashboard">
+            Regresar
+        </a>
+        <div class="mx-auto max-w-lg text-center">
+            <h2 class="text-3xl font-bold sm:text-4xl">
+                Proyecto {{project.nombre}}
+            </h2>
+        </div>
+
+        <div class="mt-10 p-4 rounded-md w-full">
+            <div class="flex">
+                <h2 class="text-3xl font-medium text-white dark:text-white">
+                    Tareas del proyecto
+                </h2>
+
+
+                <button class="ml-auto bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+                    *ngIf="session === 'administrador'" (click)="openTaskModal()">
+                    Crear tarea</button>
+
+                <app-modal [isOpen]="modalCreateOpen" (closeModalEvent)="closeTaskModal()" [title]="'Crear tarea'">
+                    <form [formGroup]="formGroup" (ngSubmit)="createProject()" class="space-y-6">
+                        <div class="col-span-6">
+                            <label for="nombre" class="block text-sm font-medium text-gray-700">
+                                Nombre
+                            </label>
+
+                            <input type="text" id="nombre" name="nombre"
+                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                                placeholder="Ingresa el nombre del proyecto" formControlName="nombre" />
+                        </div>
+                        <div class="col-span-6">
+                            <label for="Email" class="block text-sm font-medium text-gray-700">
+                                Descripcion
+                            </label>
+
+                            <input type="text" id="description" name="description"
+                                class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                                placeholder="Ingresa una descripcion" formControlName="descripcion" />
+                        </div>
+                        <button type="submit"
+                            class="mt-4 w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                            Crear tarea
+                        </button>
+                    </form>
+                </app-modal>
+            </div>
+
+            <table class="w-full mt-6 border border-collapse">
+                <thead class="bg-white" [ngClass]="{
+                                        'opacity-50':modalOpen.length != 0,
+                                    }">
+                    <tr>
+                        <th
+                            class="py-3.5 w-[500px] px-4 text-base font-medium text-left rtl:text-center text-gray-600 dark:text-gray-600">
+                            Pendiente</th>
+                        <th
+                            class="py-3.5 w-[500px] px-4 text-base font-medium text-left rtl:text-center text-gray-600 dark:text-gray-600">
+                            En progreso</th>
+                        <th
+                            class="py-3.5 w-[500px] px-4 text-base font-medium text-left rtl:text-center text-gray-600 dark:text-gray-600">
+                            Completado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="p-4 text-sm font-medium whitespace-nowrap"
+                        *ngFor="let tarea of project.tareas; let i = index">
+                        <td class="p-2" [ngClass]="{
+                            'opacity-50':modalOpen.length != 0
+                        }">
+                            <div *ngIf="tarea.estatus === 'pendiente'">
+                                <div (click)="openModal(i)"
+                                    class="w-[350px] px-8 py-4 bg-white rounded-lg shadow-md dark:bg-white">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-light text-gray-600 dark:text-gray-400">
+                                            {{tarea.fechaCreacion}}
+                                        </span>
+                                        <app-badge [estatus]="tarea.estatus"></app-badge>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <h2 class="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:cursor-pointer"
+                                            tabindex="0" role="link">
+                                            {{tarea.nombre}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2" [ngClass]="{
+                            'opacity-50':modalOpen.length != 0
+                        }">
+                            <div *ngIf="tarea.estatus === 'en_progreso'">
+                                <div (click)="openModal(i)"
+                                    class="w-[350px] px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-light text-gray-600 dark:text-gray-400">
+                                            {{tarea.fechaCreacion}}
+                                        </span>
+                                        <app-badge [estatus]="tarea.estatus"></app-badge>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <h2 class="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:cursor-pointer"
+                                            tabindex="0" role="link">
+                                            {{tarea.nombre}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2" [ngClass]="{
+                            'opacity-50':modalOpen.length != 0
+                        }">
+                            <div *ngIf="tarea.estatus === 'completado'">
+                                <div (click)="openModal(i)"
+                                    class="w-[350px] px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+                                    [ngClass]="{
+                                        
+                                    }">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm font-light text-gray-600 dark:text-gray-400">
+                                            {{tarea.fechaCreacion}}
+                                        </span>
+                                        <app-badge [estatus]="tarea.estatus"></app-badge>
+
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <h2 class="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:cursor-pointer"
+                                            tabindex="0" role="link">
+                                            {{tarea.nombre}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <app-modal [isOpen]="modalOpen[i]" [title]="tarea.nombre" (closeModalEvent)="closeModal(i)">
+                            <div class="flex-1">
+                                <h1>{{tarea.id}}</h1>
+                                <div>
+                                    <h1 class="text-base font-medium">
+                                        Descripción
+                                    </h1>
+                                    <p>
+                                        {{tarea.descripcion}}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h1 class="text-base font-medium">
+                                        Fecha de creación
+                                    </h1>
+                                    <p>
+                                        {{tarea.fechaCreacion}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-auto">
+                                <button type="button" *ngIf="tarea.estatus === 'pendiente'"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    (click)="updateStatus(tarea.id,'en_progreso')">
+                                    Empezar
+                                </button>
+                                <button type="button" *ngIf="tarea.estatus === 'en_progreso'"
+                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                    (click)="updateStatus(tarea.id,'completado')">
+                                    Completar
+                                </button>
+                            </div>
+                        </app-modal>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<router-outlet></router-outlet>

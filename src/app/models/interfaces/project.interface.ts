@@ -1,9 +1,11 @@
-export interface Project {
+import { ITask } from "./task.interface"
+import { IUser } from "./user.interface"
+
+export interface IProject {
     id: string
-    name: string
-    description: string
-    user_id: number
-    created_at: string
-    updated_at: string
-    deleted_at: string
+    nombre: string
+    descripcion: string
+    fechaCreacion: Date
+    usuario?: IUser
+    tareas?: ITask[]
 }

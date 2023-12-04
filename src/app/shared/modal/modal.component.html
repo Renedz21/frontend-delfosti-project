@@ -1,0 +1,25 @@
+<div class="flex justify-center items-center w-full">
+    <div class="absolute top-[40%] left-[40%]  z-20 w-[450px] h-auto bg-white rounded-md text-[#333] p-6 transition-all duration-300 ease-in-out"
+        [ngClass]="{ 
+                'opacity-100 pointer-events-auto': isOpen,
+                'opacity-0 pointer-events-none': !isOpen
+            }">
+        <div class="w-full h-full">
+            <div class="flex items-center justify-between">
+                <h2 class="font-semibold text-xl">{{ title }}</h2>
+                <span
+                    class="bg text-gray-800 transition-colors duration-150 rounded ease-in hover:cursor-pointer hover:bg-gray-300"
+                    (click)="closeModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-x h-5 w-5">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </span>
+            </div>
+            <div class="flex flex-col w-full gap-6 mt-8">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

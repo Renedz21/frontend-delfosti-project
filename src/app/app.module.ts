@@ -24,7 +24,8 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     NgOptimizedImage
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

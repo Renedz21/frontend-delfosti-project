@@ -39,11 +39,4 @@ export class AuthService {
 
     return JSON.parse(sessionStorage.getItem('session')!!) as Session
   }
-
-  // tokenRefresh(request:any): Observable<any> {
-  //   return this.http.post(`${environment.apiUrl}/auth/refresh`, request);
-  // }
-
-
-
 }

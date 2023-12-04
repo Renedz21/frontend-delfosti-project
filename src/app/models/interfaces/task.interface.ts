@@ -1,11 +1,10 @@
-export interface Task {
-    id: string
-    name: string
-    description: string
-    in_progress: boolean
-    completed: boolean
-    project_id: string
-    created_at: string
-    updated_at: string
-    deleted_at: string
+import { IProject } from "./project.interface";
+
+export interface ITask {
+    id: string,
+    nombre: string,
+    descripcion: string,
+    fechaCreacion: Date,
+    estatus: string,
+    proyectoId: IProject,
 }

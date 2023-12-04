@@ -1,0 +1,44 @@
+<section class="w-full h-full bg-gray-900 text-white">
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <div class="mx-auto max-w-lg text-center">
+
+            <button (click)="cerrarSesion()">
+                Cerrar sesión
+            </button>
+
+
+            <h2 class="text-3xl font-bold sm:text-4xl">
+                Bienvenido de nuevo, <span class="text-pink-500">{{name}}</span>
+            </h2>
+
+            <p class="mt-4 text-gray-300">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus
+                nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.
+            </p>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <a *ngFor="let item of projects"
+                class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+                [routerLink]="['/dashboard/project/', item.id]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-folder-dot h-10 w-10 text-pink-500">
+                    <path
+                        d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+                    <circle cx="12" cy="13" r="1" />
+                </svg>
+
+                <h2 class="mt-4 text-xl font-bold text-white">
+                    {{ item.nombre }}
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-300">
+                    {{item.descripcion}}
+                </p>
+            </a>
+        </div>
+    </div>
+</section>
+<router-outlet></router-outlet>
